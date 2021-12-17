@@ -19,7 +19,7 @@ const SIN_CLIENTES = /* html */
 const firestore = getFirestore();
 const daoRol = firestore.
   collection("Rol");
-const daoAlumno = firestore.
+const daoCliente = firestore.
   collection("Cliente");
 const daoUsuario = firestore.
   collection("Usuario");
@@ -32,7 +32,7 @@ export function
   selectClientes(select,
     valor) {
   valor = valor || "";
-  daoAlumno.
+  daoCliente.
     orderBy("nombre").
     onSnapshot(
       snap => {
