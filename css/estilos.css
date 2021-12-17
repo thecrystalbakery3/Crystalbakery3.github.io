@@ -10,14 +10,11 @@
 }
 
 body{
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0.5rem;
-    color: black;
-    background: url(Laterales.jpg);   
-    background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
+     max-width: 640px;
+  margin: 0 auto;
+  padding: 0.5rem;
+  color: black;
+  background-color:dimgray;
 }
 
  html {   
