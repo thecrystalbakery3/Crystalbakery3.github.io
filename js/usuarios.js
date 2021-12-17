@@ -11,16 +11,16 @@ import {
   muestraUsuarios
 } from "./navegacion.js";
 
-const SIN_ALUMNOS = /* html */
+const SIN_CLIENTES = /* html */
   `<option value="">
-    -- Sin Alumnos --
+    -- Sin Clientes --
   </option>`;
 
 const firestore = getFirestore();
 const daoRol = firestore.
   collection("Rol");
 const daoAlumno = firestore.
-  collection("Alumno");
+  collection("Cliente");
 const daoUsuario = firestore.
   collection("Usuario");
 
@@ -29,22 +29,22 @@ const daoUsuario = firestore.
     HTMLSelectElement} select
  * @param {string} valor */
 export function
-  selectAlumnos(select,
+  selectClientes(select,
     valor) {
   valor = valor || "";
   daoAlumno.
     orderBy("nombre").
     onSnapshot(
       snap => {
-        let html = SIN_ALUMNOS;
+        let html = SIN_CLIENTES;
         snap.forEach(doc =>
-          html += htmlAlumno(
+          html += htmlClientes(
             doc, valor));
         select.innerHTML = html;
       },
       e => {
         muestraError(e);
-        selectAlumnos(
+        selectClientes(
           select, valor);
       }
     );
@@ -56,13 +56,13 @@ export function
   DocumentSnapshot} doc
  * @param {string} valor */
 function
-  htmlAlumno(doc, valor) {
+  htmlClientes(doc, valor) {
   const selected =
     doc.id === valor ?
       "selected" : "";
   /**
    * @type {import("./tipos.js").
-                  Alumno} */
+                  Cliente} */
   const data = doc.data();
   return (/* html */
     `<option
@@ -147,15 +147,15 @@ export async function
     id) {
   try {
     evt.preventDefault();
-    const alumnoId =
+    const clienteId =
       getForánea(formData,
-        "alumnoId");
+        "clienteId");
     const rolIds =
       formData.getAll("rolIds");
     await daoUsuario.
       doc(id).
       set({
-        alumnoId,
+        clienteId,
         rolIds
       });
     const avatar =
