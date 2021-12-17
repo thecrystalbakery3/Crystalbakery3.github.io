@@ -9,12 +9,13 @@
   --colorMiNav: white;
 }
 
-body {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0.5rem;
-  color: black;
-  background-color:dimgray;
+body{
+    margin: 0;
+    padding: 0;
+    background: url(Laterales.jpg);   
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
 }
 
  html {   
