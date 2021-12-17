@@ -1,5 +1,5 @@
 export function
-  muestraAlumnos() {
+  muestraClientes() {
   location.href =
     "alumnos.html";
 }
