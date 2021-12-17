@@ -13,9 +13,9 @@ import {
   tieneRol
 } from "./seguridad.js";
 
-const daoAlumno =
+const daoCliente =
   getFirestore().
-    collection("Alumno");
+    collection("Cliente");
 const params =
   new URL(location.href).
     searchParams;
@@ -41,19 +41,18 @@ async function protege(usuario) {
 async function busca() {
   try {
     const doc =
-      await daoAlumno.
+      await daoCliente.
         doc(id).
         get();
     if (doc.exists) {
       /**
        * @type {
           import("./tipos.js").
-                  Alumno} */
+                  Cliente} */
       const data = doc.data();
-      forma.matricula.value = data.matricula;
-      forma.nombre.value = data.nombre || "";
       forma.telefono.value = data.telefono || "";
-      forma.grupo.value = data.grupo || "";
+      forma.nombre.value = data.nombre || "";      
+      forma.direccion.value = data.direccion || "";
       forma.fecha.value = data.fecha || "";
       forma.addEventListener(
         "submit", guarda);
@@ -76,27 +75,24 @@ async function guarda(evt) {
     evt.preventDefault();
     const formData =
       new FormData(forma);
-    const matricula = getString(
-        formData, "matricula").trim();  
-    const nombre = getString(formData, "nombre").trim();
     const telefono = getString(formData, "telefono").trim();
-    const grupo = getString(formData, "grupo").trim();
+    const nombre = getString(formData, "nombre").trim();    
+    const direccion = getString(formData, "direccion").trim();
     const fecha = getString(formData, "fecha").trim();
     /**
      * @type {
         import("./tipos.js").
-                Alumno} */
+                Cleinte} */
     const modelo = {
-      matricula, 
+      telefono, 
       nombre,
-      telefono,
-      grupo,
+      direccion,
       fecha
     };
-    await daoAlumno.
+    await daoCliente.
       doc(id).
       set(modelo);
-    muestraAlumnos();
+    muestraClientes();
   } catch (e) {
     muestraError(e);
   }
@@ -106,10 +102,10 @@ async function elimina() {
   try {
     if (confirm("Confirmar la " +
       "eliminación")) {
-      await daoAlumno.
+      await daoCliente.
         doc(id).
         delete();
-      muestraAlumnos();
+      muestraClientes();
     }
   } catch (e) {
     muestraError(e);
